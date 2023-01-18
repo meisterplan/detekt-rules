@@ -1,4 +1,4 @@
-package com.github.meisterplan.detektrules
+package com.meisterplan.detektrules
 
 import io.gitlab.arturbosch.detekt.api.CodeSmell
 import io.gitlab.arturbosch.detekt.api.Config
