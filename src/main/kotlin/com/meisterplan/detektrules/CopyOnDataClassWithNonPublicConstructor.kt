@@ -42,8 +42,8 @@ class CopyOnDataClassWithNonPublicConstructor(config: Config) : Rule(config) {
             ) {
                 report(
                     CodeSmell(
-                        issue, Entity.from(expression), "Non-public constructed data class ${calleeExpression.getReceiverExpression()?.text ?: ""}"
-                                + " of type ${type.fqNameOrNull()} should not bypass constructor by calling copy()."
+                        issue, Entity.from(expression), "Non-public constructed data class '${calleeExpression.getReceiverExpression()?.text ?: ""}'"
+                                + " of type '${type.fqNameOrNull()}' should not bypass constructor by calling copy()."
                     )
                 )
             }
