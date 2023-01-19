@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/meisterplan/detekt-rules.svg)](https://jitpack.io/#meisterplan/detekt-rules)
+[![](https://jitpack.io/v/com.meisterplan/detekt-rules.svg)](https://jitpack.io/#com.meisterplan/detekt-rules)
 
 # Meisterplan Detekt Rules
 
