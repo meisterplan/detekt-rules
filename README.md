@@ -20,3 +20,5 @@ dependencies {
 ```
 
 If you want to configure the rules individually look at the [config.yml](https://github.com/meisterplan/detekt-rules/blob/main/src/main/resources/config/config.yml) and set the same flags in your local detekt config.
+
+For `CopyOnDataClassWithNonPublicConstructor`, it is required to [run detekt with type resolution](https://detekt.dev/docs/gettingstarted/type-resolution#enabling-on-a-jvm-project).

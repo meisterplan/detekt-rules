@@ -14,9 +14,13 @@ internal class CopyOnDataClassWithNonPublicConstructorTest(private val env: Kotl
     fun `reports private data copy`() {
         val code = """
         @Suppress("DataClassPrivateConstructor")
-        data class A private constructor(val i: Int)
-
-        val x = A(3)
+        data class A private constructor(val i: Int) {
+            companion object {
+                fun create(i: Int) = A(i)
+            }
+        }
+        
+        val x = A.create(3)
         val y = x.copy(i = 4)
         """
         val findings = CopyOnDataClassWithNonPublicConstructor(Config.empty).compileAndLintWithContext(env, code)

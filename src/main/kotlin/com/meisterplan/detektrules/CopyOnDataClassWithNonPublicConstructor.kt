@@ -7,16 +7,18 @@ import io.gitlab.arturbosch.detekt.api.Entity
 import io.gitlab.arturbosch.detekt.api.Issue
 import io.gitlab.arturbosch.detekt.api.Rule
 import io.gitlab.arturbosch.detekt.api.Severity
+import io.gitlab.arturbosch.detekt.api.internal.RequiresTypeResolution
 import io.gitlab.arturbosch.detekt.rules.fqNameOrNull
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.psi.KtCallExpression
-import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.psiUtil.getReceiverExpression
 import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassMemberScope
 
+@RequiresTypeResolution
 class CopyOnDataClassWithNonPublicConstructor(config: Config) : Rule(config) {
+
     override val issue = Issue(
         javaClass.simpleName,
         Severity.CodeSmell,
@@ -37,9 +39,14 @@ class CopyOnDataClassWithNonPublicConstructor(config: Config) : Rule(config) {
             val typeMemberScope = type?.memberScope
             if (typeMemberScope is LazyClassMemberScope
                 && typeMemberScope.getPrimaryConstructor()?.visibility != DescriptorVisibilities.PUBLIC
-            )
-                report(CodeSmell(issue, Entity.from(expression), "Non-public constructed data class ${calleeExpression.getReceiverExpression()?.text ?: ""}"
-                        + " of type ${type.fqNameOrNull()} should not bypass constructor by calling copy()."))
+            ) {
+                report(
+                    CodeSmell(
+                        issue, Entity.from(expression), "Non-public constructed data class ${calleeExpression.getReceiverExpression()?.text ?: ""}"
+                                + " of type ${type.fqNameOrNull()} should not bypass constructor by calling copy()."
+                    )
+                )
+            }
         }
 
     }
