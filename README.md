@@ -1,28 +1,24 @@
-# Detekt custom rule template
+[![](https://jitpack.io/v/meisterplan/detekt-rules.svg)](https://jitpack.io/#meisterplan/detekt-rules)
 
-This repository is a template. You can use it to generate your own repository to write and share your custom rules.
+# Meisterplan Detekt Rules
+
+This repo contains [Detekt](https://detekt.dev/) Rules useful for developing [Meisterplan](https://github.com/meisterplan).
 
 ## How to use it
 
-1. Create a new repository using this one as a template. [Click here][create_template]
-2. Edit MyRule to fit your use case
-3. Share your rule! You can upload your rule to [Maven Central][maven_central] if you want. If you don't want to do all
-   the steps that Maven Central requires you can just share your rule using [jitpack][jitpack].
-4. Extra: you can remove all this README and explain what your rule does and how to configure it.
+Look up the [most recent release](https://github.com/meisterplan/detekt-rules/releases) and add the dependency to your `build.gradle.kts`:
+```kotlin
+repositories {
+    // ...
+    maven { url = uri("https://jitpack.io") }
+}
 
-## Documentation
+dependencies {
+    // ...
+    detektPlugins("com.meisterplan:detekt-rules:VERSION")
+}
+```
 
-You can find the documentation about how to write custom [rules here][custom_rule_documentation].
+If you want to configure the rules individually look at the [config.yml](https://github.com/meisterplan/detekt-rules/blob/main/src/main/resources/config/config.yml) and set the same flags in your local detekt config.
 
-## Note
-
-Remember that, by default, all rules are disabled. To configure your rules edit the file in
-`src/main/resources/config/config.yml`.
-
-[create_template]: https://github.com/detekt/detekt-custom-rule-template/generate
-
-[maven_central]: https://search.maven.org/
-
-[custom_rule_documentation]: https://detekt.github.io/detekt/extensions.html
-
-[jitpack]: https://jitpack.io/
+For `CopyOnDataClassWithNonPublicConstructor`, it is required to [run detekt with type resolution](https://detekt.dev/docs/gettingstarted/type-resolution#enabling-on-a-jvm-project).
