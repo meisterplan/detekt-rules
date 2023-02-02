@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Check that the publish plugin works
+      - name: Publish to GitHub Packages
         uses: gradle/gradle-build-action@v2
         with:
           arguments: "publish -Pversion=${{ github.event.release.name }}"
