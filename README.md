@@ -8,14 +8,31 @@ This repo contains [Detekt](https://detekt.dev/) Rules useful for developing [Me
 
 Look up the [most recent release](https://github.com/meisterplan/detekt-rules/releases) and add the dependency to your `build.gradle.kts`:
 ```kotlin
+dependencies {
+    // ...
+    detektPlugins("com.meisterplan:detekt-rules:VERSION")
+}
+```
+
+The dependency can either be fetched from jitpack.io:
+```kotlin
 repositories {
     // ...
     maven { url = uri("https://jitpack.io") }
 }
+```
 
-dependencies {
+or from GitHub Packages:
+```kotlin
+repositories {
     // ...
-    detektPlugins("com.meisterplan:detekt-rules:VERSION")
+    maven {
+        url = uri("https://maven.pkg.github.com/meisterplan/detekt-rules")
+        credentials {
+            username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+        }
+    }
 }
 ```
 
