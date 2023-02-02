@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.meisterplan.detektrules"
+group = "com.meisterplan"
 version = "1.0-SNAPSHOT"
 
 repositories {
