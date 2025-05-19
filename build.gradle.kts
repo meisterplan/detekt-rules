@@ -5,8 +5,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.meisterplan.detektrules"
-version = "1.0-SNAPSHOT"
+group = "com.meisterplan"
 
 repositories {
     mavenCentral()
@@ -34,6 +33,17 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/meisterplan/detekt-rules")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }
